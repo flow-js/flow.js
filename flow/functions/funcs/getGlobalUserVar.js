@@ -1,18 +1,18 @@
 module.exports = async cmd => {
-  const code = cmd.command.code
-  const val = code.split('$getGlobalUserVar').length -1
-  const inside = code.split('$getGlobalUserVar')[val].after()
-  const error = cmd.inside(inside)
+  const cd = cmd.command.code
+  const s = code.split('$getGlobalUserVar').length -1
+  const inside = code.split('$getGlobalUserVar')[s].after()
+  const err = cmd.inside(inside)
   
   if(error)
-    return func.error(error)
-    const [ variable, user = cmd.message.author.id ] = inside.splits
-  if(func.client.variables[variable] === undefined)
-    return cmd.error(`Error: \`Variable (${variable}) not found!\` `)
-    let item = await cmd.client.db.get('main', `${variable}.${user}`)
+    return cmd.error(err)
+    const [ data, user = cmd.message.author.id ] = inside.splits
+  if(cmd.client.variables[data] === undefined)
+    return cmd.error(`**Error:** \`Variable (${data}) not found!\` `)
+    let item = await cmd.client.db.get('main', `${data}_${user}`)
    if(!item)
-     item = { value: cmd.client.variables[variable] }
+     item = { value: cmd.client.variables[data] }
    return {
-     code: code.replaceLast(`$getGlobalUserVar${inside}`, item.value)
+     code: cd.replaceLast(`$getGlobalUserVar${inside}`, item.value)
   }
 }
