@@ -21,8 +21,8 @@ Open Source for the Community.
 ```shh-session
 npm install flow.js
 ```
-<br />
-### Example
+
+## Example
 ```js
 const flow = require('flow.js'); // TAKING DATA FROM FLOW.JS
 const bot = new flow.Bot ({
@@ -30,7 +30,7 @@ const bot = new flow.Bot ({
   prefix: ['!', '<@$clientID> '] // DISCORD BOT PREFIX
 });
 
-bot.command(); // LETTING BOT TO SEND MESSAGE
+bot.onMessage(); // LETTING BOT TO SEND MESSAGE
 bot.readyCommand({ // SENDING DATA ON THIS COMMAND WHEN BOT ONLINE
   channel: '', // CHANNEL ID, OPTIONAL
   code: `
