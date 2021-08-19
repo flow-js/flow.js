@@ -7,11 +7,11 @@ const Parser = {
   $setGlobalUserVar: 'Set value of a global user Variable;$setGlobalUserVar[variable name;variable value;userID (optional)]',
   $getGlobalUserVar: 'Get value of a global user Variable;$getGlobUserVar[variable name;userID (optional)]',
   // EMBED
-  $description: 'Set embed Description;$description[text]",
+  $description: 'Set embed Description;$description[text]',
   $title: 'Set embed Title;$title[text;link]',
   // GENERAL
   $message: 'Return what the author said;$message[argument number (optional)]',
-  $ping: 'Return database current ping;$pingc,
+  $ping: 'Return database current ping;$ping',
   $eval: 'Evaluating code, useable for testing;$eval[code;return code (yes/no)]',
   
 }
