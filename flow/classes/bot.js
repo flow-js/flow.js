@@ -1,15 +1,19 @@
-const discord = require('discord.js');
+const Discord = require('discord.js');
 const axios = require('axios');
-const db = require('dbdjs.db');
-const { EventEmitter } = require('evemts');
+const DBDdb = require('dbdjs.db');
+const { EventEmitter } = require('events');
+const util = Discord.SnowflakeUtil;
+const WorkerPool = require('../others/workerPool');
+const indexSearcher = require('../others/indexSearcher');
+const Event = require('/events.js'(;
 const API = require('../booster.js');
 
 const shardClient = require('../others/shard_client.js');
-const client = new discord.Client({
-  partials: ['CHANNEL', "GUILD_MEMBER', 'MESSAGE','USER', 'REACTION'],   
+const client = new Discord.Client({
+  partials: ['CHANNEL', 'GUILD_MEMBER', 'MESSAGE','USER', 'REACTION'],   
 });
 
-client.ytSearch= new Worker pool(
+client.ytSearch new WorkerPool(
   0,
   {
     filename: require.resolve('../others/ytSearch');
