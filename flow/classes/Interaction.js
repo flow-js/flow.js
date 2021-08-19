@@ -60,3 +60,79 @@ class Interaction {
                             } 
                         }, 1000)
                     }
+                    if (!check) {
+                        setTimeout(async () => {
+                            let d = await this.client.api.applications(this.client.user.id).commands.get()
+                            d = d.find(x => x.name.toLowerCase() == this.command.name.toLowerCase())
+                            if (d) {
+                                c = {                                
+                                    id: d.id,                                
+                                    name: d.name,                           
+                                    version: d.version,                               
+                                    description: d.description,                                 
+                                    options: d.options || [],                                
+                                    application: this.client,                                  
+                                    guild: null,                               
+                                    timestamp: Snowflake.deconstruct(d.id)
+                                        .timestamp,                             
+                                    createdAt: Snowflake.deconstruct(d.id)
+                                        .date                         
+                                    }
+                                this.client.applications.slash.set(c.id, c)
+                            } else {
+                                c = blank
+                            }
+                        }, 2000)
+                    }
+                }
+                const data = this.client.api.interactions(this.id, this.token).callback.post({
+                    data: {
+                        type, 
+                        data: {
+                            content: content || blank,
+                            embeds: embed ? Array.isArray(embed) ? embed : [embed] : [],
+                            flags, components: typeof components === "object" ? Array.isArray(components) ? components : [components] : []
+                        }
+                    }
+                })
+            } catch (e) {
+                console.log(e.message)
+            }
+        } else {
+            try {
+                const data = this.client.api.interactions(this.id, this.token).callback.post({
+                    data: {
+                        type, 
+                        data: {
+                            content: content || blank,
+                            embeds: embed ? Array.isArray(embed) ? embed : [embed] : [],
+                            flags ,
+                            components: typeof components === "object" ? Array.isArray(components) ? components : [components] : []
+                        }
+                    }
+                })
+            } catch (e) {
+                console.log(e.message)
+            }
+        }
+    }
+    async delete() {
+        const req = await axios.delete
+    }
+    async get() {
+        const d = await this.client.api.webhooks(this.client.user.id, this.token).messages("@original").get()
+        return d 
+    }
+    async edit(content, embed, components) {
+        await this.client.api.webhooks(this.client.user.id, this.token).messages("@original").patch({
+            data: {
+                content, components: components,
+                embeds: embed ? Array.isArray(embed) ? embed : [embed] : []
+            }
+        })        
+    }
+    async deleteResponse() {
+        const got = await this.client.api.webhooks(this.client.user.id, this.token).messages("@original").delete()
+    }
+}
+module.exports = Interaction
